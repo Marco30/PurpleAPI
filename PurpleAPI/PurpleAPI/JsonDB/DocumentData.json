@@ -1,0 +1,24 @@
+{
+  [
+    {
+      "customerNumber": "12345",
+      "documentNumber": "a0b1c2d3-e4f5-g6h7-i8j9-k0l1m2n3o4p5",
+      "documentText": "Document text 1"
+    },
+    {
+      "customerNumber": "67890",
+      "documentNumber": "q1w2e3r4-t5y6-u7i8-o9p0a1s2d3f4",
+      "documentText": "Document text 2"
+    },
+    {
+      "customerNumber": "54321",
+      "documentNumber": "g1h2i3j4-k5l6-m7n8-o9p0q1r2s3t4",
+      "documentText": "Document text 3"
+    },
+    {
+      "customerNumber": "09876",
+      "documentNumber": "u5i6o7p8-a9s0d1f2g3h4-j5k6l7z8x9c0",
+      "documentText": "Document text 4"
+    }
+  ]
+}

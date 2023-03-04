@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj": {}
+    "D:\\Code\\NewAPI\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj": {}
   },
   "projects": {
-    "D:\\Code\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj": {
+    "D:\\Code\\NewAPI\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj",
+        "projectUniqueName": "D:\\Code\\NewAPI\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj",
         "projectName": "PurpleAPI",
-        "projectPath": "D:\\Code\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj",
+        "projectPath": "D:\\Code\\NewAPI\\PurpleAPI\\PurpleAPI\\PurpleAPI.csproj",
         "packagesPath": "C:\\Users\\Marco\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\PurpleAPI\\PurpleAPI\\obj\\",
+        "outputPath": "D:\\Code\\NewAPI\\PurpleAPI\\PurpleAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marco\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[7.2.5, )"
             }
           },
           "imports": [
