@@ -1,6 +1,8 @@
 ﻿
 using PurpleAPI.Interface;
 using PurpleAPI.Model;
+using RabbitMQ.Client;
+using System.Text;
 using System.Text.Json;
 
 
@@ -12,11 +14,13 @@ namespace PurpleAPI.Microservice
         private readonly List<UserDocument> _documents;
         readonly static string startupPath = Environment.CurrentDirectory;
         private readonly string _jsonDbFilePath = $@"{startupPath}/JsonDB/" + "DocumentData.json";
+        private readonly IModel _channel;
 
-
-        public DocumentService()
+        public DocumentService(IModel channel)
         {
-            
+            _channel = channel;
+
+            _documents = new List<UserDocument>();
 
             if (File.Exists(_jsonDbFilePath))
             {
@@ -24,11 +28,7 @@ namespace PurpleAPI.Microservice
                 string json = File.ReadAllText(_jsonDbFilePath);
                 _documents = JsonSerializer.Deserialize<List<UserDocument>>(json);
             }
-            else
-            {
-                // Create an empty list if the JSON file does not exist
-                _documents = new List<UserDocument>();
-            }
+    
         }
 
         public async Task<UserDocument> GetDocumentAsync(string customerNumber)
@@ -58,6 +58,10 @@ namespace PurpleAPI.Microservice
                 // which would then handle the actual event publishing and PDF generation/storage logic.
                 // For the purposes of this example, we can just leave this as a TODO item.
             }
+
+            // Publish a message to the pdf-generation queue
+            var body = Encoding.UTF8.GetBytes(document.CustomerNumber);
+            _channel.BasicPublish(exchange: "", routingKey: "pdf-generation", basicProperties: null, body: body);
 
             // Return the found or newly created document
             return document;

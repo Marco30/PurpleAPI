@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PurpleAPI"
+    "\\PurpleAPI",
+    "\\PurpleAPI\\PurpleAPI",
+    "\\PurpleAPI\\PurpleAPI\\Controllers",
+    "\\PurpleAPI\\PurpleAPI\\Microservice"
   ],
-  "SelectedNode": "\\PurpleAPI",
+  "SelectedNode": "\\PurpleAPI\\PurpleAPI\\Microservice\\RabbitMQService.cs",
   "PreviewInSolutionExplorer": false
 }
