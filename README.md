@@ -26,7 +26,7 @@ Run this the command i the console "docker-compose up"
 
 Will create an image that runs RabbitMQ, it's is a messaging broker
 
-To run the API then we need to have it running in docker. 
+To run the API we need to have it running in docker. 
 
 When RabbitMQ is up and running
 
