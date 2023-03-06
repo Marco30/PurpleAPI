@@ -2,6 +2,7 @@
 using PurpleAPI.Interface;
 using PurpleAPI.Model;
 using RabbitMQ.Client;
+using System;
 using System.Text;
 using System.Text.Json;
 
@@ -59,8 +60,15 @@ namespace PurpleAPI.Microservice
                 // For the purposes of this example, we can just leave this as a TODO item.
             }
 
+            var data = JsonSerializer.Serialize(document);
+
+            // Encode the JSON string into a byte array
+            var body = Encoding.UTF8.GetBytes(data);
+
+
             // Publish a message to the pdf-generation queue
-            var body = Encoding.UTF8.GetBytes(document.CustomerNumber);
+           // var body = Encoding.UTF8.GetBytes(document.CustomerNumber);
+
             _channel.BasicPublish(exchange: "", routingKey: "pdf-generation", basicProperties: null, body: body);
 
             // Return the found or newly created document

@@ -7,6 +7,9 @@ using PurpleAPI.Interface;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using PurpleAPI.Model;
+using System.Text.Json;
+using iText.Kernel.Pdf.Action;
 
 namespace PurpleAPI.Microservice
 {
@@ -16,7 +19,7 @@ namespace PurpleAPI.Microservice
         private readonly IModel _channel;
         private readonly EventingBasicConsumer _consumer;
 
-        public PdfService(IModel channel)
+        public  PdfService(IModel channel)
         {
             _channel = channel;
 
@@ -26,13 +29,29 @@ namespace PurpleAPI.Microservice
             _consumer = new EventingBasicConsumer(_channel);
             _consumer.Received += async (model, ea) =>
             {
-                var customerNumber = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var customerData = Encoding.UTF8.GetString(ea.Body.ToArray());
+
+                // Deserialize the message into a class model
+                var UserDocument = JsonSerializer.Deserialize<UserDocument>(customerData);
 
                 // Generate a PDF for the customer number
-                var pdfContent = await GeneratePdfAsync(customerNumber);
+                //var pdfContent = await GeneratePdfAsync(customerNumber);
+                var pdf = new Pdf();
+
+                pdf.UserId = UserDocument.CustomerNumber;
+                pdf.Bytes = await GeneratePdfAsync(UserDocument.DocumentText);
 
                 // Publish a message to the storage queue with the PDF content
-                _channel.BasicPublish(exchange: "", routingKey: "storage", basicProperties: null, body: pdfContent);
+                // _channel.BasicPublish(exchange: "", routingKey: "storage", basicProperties: null, body: pdfContent);
+
+                var data = JsonSerializer.Serialize(pdf);
+
+                // Encode the JSON string into a byte array
+                var body = Encoding.UTF8.GetBytes(data);
+
+
+                // Publish a message to the storage queue with the PDF content
+                _channel.BasicPublish(exchange: "", routingKey: "storage", basicProperties: null, body: body);
 
                 // Acknowledge the message
                 _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);

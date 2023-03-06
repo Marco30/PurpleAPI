@@ -2,6 +2,6 @@
 {
     public interface IStorageService
     {
-        Task<string> SavePdfAsync(byte[] pdfBytes);
+        Task<string> SavePdfAsync(string userId, byte[] pdfBytes);
     }
 }

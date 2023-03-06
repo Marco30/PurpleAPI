@@ -30,9 +30,9 @@ namespace PurpleAPI.Controllers
         }
 
         // POST: UserController/Create
-        [HttpPost(Name = "GetUserData")]
+        [HttpPost("StartTest")]
         // [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateTest()
+        public async Task<ActionResult> Test()
         {
             var customerNumber = "67890";
 

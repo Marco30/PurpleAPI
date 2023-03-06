@@ -30,13 +30,12 @@ namespace PurpleAPI.Microservice
             _channel = _connection.CreateModel(); // Create a new channel using the connection.
 
             // Declare queues and exchanges here
-            _channel.QueueDeclare(queue: "user-signup", durable: true, exclusive: false, autoDelete: false, arguments: null);
             _channel.QueueDeclare(queue: "pdf-generation", durable: true, exclusive: false, autoDelete: false, arguments: null);
             _channel.QueueDeclare(queue: "storage", durable: true, exclusive: false, autoDelete: false, arguments: null);
             // Declare a queue named "my-queue" with durable: true, exclusive: false, autoDelete: false, and no additional arguments.
         }
 
-       /* public void Dispose()
+        /* public void Dispose()
         {
             _channel.Close(); // Close the channel.
             _connection.Close(); // Close the connection.
